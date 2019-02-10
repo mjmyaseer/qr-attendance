@@ -28,6 +28,15 @@ class RepositoryServiceProvider extends ServiceProvider
             \Repo\Mysql\CityRepo::class
         );
 
+        $this->app->bind(
+            \Repo\Contracts\OTPInterface::class,
+            \Repo\Mysql\OTPRepo::class
+        );
+
+        $this->app->bind(
+            \Repo\Contracts\EventInterface::class,
+            \Repo\Mysql\EventRepo::class
+        );
 
     }
 }

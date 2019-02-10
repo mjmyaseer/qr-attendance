@@ -3,18 +3,26 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Http\Models\Customer;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Isurindu\LaravelSms\Facades\Sms;
 use Repo\Contracts\CustomerInterface;
+use Repo\Contracts\OTPInterface;
 
 class CustomersController extends Controller
 {
     private $customer;
+    private $otp;
 
-    public function __construct(CustomerInterface $customer)
+    public function __construct(
+        CustomerInterface $customer,
+        OTPInterface $otp
+    )
     {
         $this->customer = $customer;
+        $this->otp = $otp;
     }
 
     public function index()
@@ -30,7 +38,7 @@ class CustomersController extends Controller
             $customers = $this->customer->index($id);
 
             return view('customer.add_customers')->with('customers', $customers);
-        }else{
+        } else {
             return view('customer.add_customers');
         }
 
@@ -79,11 +87,39 @@ class CustomersController extends Controller
         return \response()->json($customer);
     }
 
-    public function getCustomer($nic)
+    public function getCustomer(Request $request)
     {
+        $nic = $request->get('nic');
         $customer = $this->customer->getCustomer($nic);
+        $data = $customer[0];
+        $otp = mt_rand(1023, 9999);
 
-        dd($customer);
-        return \response()->json($customer);
+        if (isset($data->customer_id)) {
+            $data->otp = $otp;
+
+            $this->sendSms($data);
+        } else {
+            return $customer['status'] = [
+                'status' => 'FAILED',
+                'code' => 403,
+                'error' => Config::get('custom_messages.INVALID_NIC'),
+                'message' => 'Invalid User'
+            ];
+        }
+
+        // TODO remove otp from response
+        return \response()->json($customer[0]);
+    }
+
+    private function sendSms($data)
+    {
+        $this->otp->saveOTP($data);
+    }
+
+    public function verifyOtp(Request $request)
+    {
+        $data = $request->all();
+
+        dd($data);
     }
 }

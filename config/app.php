@@ -164,6 +164,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
+        Isurindu\LaravelSms\LaravelSmsServiceProvider::class,
 
         /*
          * Package Service Providers...

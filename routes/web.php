@@ -25,8 +25,10 @@ Route::get('/sign-in.html', 'User\UsersController@index');
 Route::post('/sign-in.html', "Auth\LoginController@doLogin");
 Route::post('api/sign-in', "Auth\LoginController@doLogin");
 Route::get('logout', "Auth\LoginController@doLogout");
-
-
+//Route::post('check/otp', "Customer\CustomersController@verifyOtp");
+//Route::post('check/otp', function (){
+//    dd(11);
+//});
 
 
 Route::get('/aa', function () {
@@ -66,6 +68,11 @@ Route::group(['prefix' => 'secure'], function () {
         Route::post('/add-customers/{id}', 'Customer\CustomersController@saveCustomer');
         Route::post('/add-customers', 'Customer\CustomersController@saveCustomer');
 
+        Route::get('/event', 'Event\EventController@index');
+        Route::get('/add-event', 'Event\EventController@addEvent');
+        Route::get('/add-event/{id}', 'Event\EventController@addEvent');
+        Route::post('/add-event/{id}', 'Event\EventController@saveEvent');
+        Route::post('/add-event', 'Event\EventController@saveEvent');
 
         Route::get('/branch', 'Branch\BranchController@index');
         Route::get('/add-branch', 'Branch\BranchController@addBranch');
@@ -96,16 +103,15 @@ Route::group(['prefix' => 'secure'], function () {
         Route::get('/qr-code', "QR\QRController@scanQRCode");
 
 
-
-
     });
 });
 
 Route::group(['prefix' => 'secureApi'], function () {
-        Route::get('/check/{nic}', "Customer\CustomersController@getCustomer");
-    });
+    //check nic and send otp
+    Route::post('/check/nic', "Customer\CustomersController@getCustomer");
 
-Route::get('/check', function (){dd(11213);});
+    Route::post('/check/otp', "Customer\CustomersController@verifyOtp");
+});
 
 
 //User related Routes

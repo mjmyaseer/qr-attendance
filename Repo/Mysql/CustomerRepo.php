@@ -9,6 +9,7 @@
 namespace repo\Mysql;
 
 use App\Http\Models\Customer;
+use App\Http\Models\OTP;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Repo\Contracts\CustomerInterface;
@@ -34,13 +35,13 @@ class CustomerRepo implements CustomerInterface
     public function index($id = null)
     {
         $query = DB::table(Customer::TABLE)
-            ->select(Customer::TABLE.'.id as customer_id',Customer::TABLE.'.customer_code as customer_code',
-                Customer::TABLE.'.customer_name as customer_name',Customer::TABLE.'.customer_email as customer_email',
-                Customer::TABLE.'.customer_telephone as customer_telephone',
-                Customer::TABLE.'.customer_address as customer_address',
-                Customer::TABLE.'.customer_nic as customer_nic',
-                Customer::TABLE.'.created_at as supplier_created_at',
-                Customer::TABLE.'.updated_at as supplier_updated_at');
+            ->select(Customer::TABLE . '.id as customer_id', Customer::TABLE . '.customer_code as customer_code',
+                Customer::TABLE . '.customer_name as customer_name', Customer::TABLE . '.customer_email as customer_email',
+                Customer::TABLE . '.customer_telephone as customer_telephone',
+                Customer::TABLE . '.customer_address as customer_address',
+                Customer::TABLE . '.customer_nic as customer_nic',
+                Customer::TABLE . '.created_at as supplier_created_at',
+                Customer::TABLE . '.updated_at as supplier_updated_at');
         if ($id != '' && !isset($id['customer_name'])) {
             $query->where(Customer::TABLE . '.id', '=', $id);
         }
@@ -62,12 +63,12 @@ class CustomerRepo implements CustomerInterface
         return $results;
     }
 
-    public function saveCustomer($id = null,$request)
+    public function saveCustomer($id = null, $request)
     {
         try {
-            if($id != null){
+            if ($id != null) {
                 $customer = $this->customer->where('id', $id)->first();
-            }else{
+            } else {
                 $customer = new Customer();
             }
 
@@ -105,7 +106,8 @@ class CustomerRepo implements CustomerInterface
     public function getCustomer($nic)
     {
         $query = DB::table(Customer::TABLE)
-            ->select(Customer::TABLE.'.id as customer_id')
+            ->select(Customer::TABLE . '.id as customer_id'
+            )
             ->where(Customer::TABLE . '.customer_nic', '=', $nic);
 
         $results = $query->get();
