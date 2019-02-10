@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Http\Models\Customer;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
@@ -118,8 +119,16 @@ class CustomersController extends Controller
 
     public function verifyOtp(Request $request)
     {
-        $data = $request->all();
 
-        dd($data);
+        $results = $this->otp->verifyOTP($request);
+
+        if ($results == 1) {
+            return response()
+                ->make('',204);
+        } else {
+            return response()
+                ->make(Config::get('custom_messages.INVALID_OTP'),403);
+        }
+
     }
 }

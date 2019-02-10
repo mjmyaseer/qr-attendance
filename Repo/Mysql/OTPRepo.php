@@ -33,4 +33,17 @@ class OTPRepo implements OTPInterface
             return $otp;
     }
 
+    public function verifyOTP($request)
+    {
+        $otp = $request->otp;
+        $user_id = $request->user_id;
+
+        $result = $this->otp
+            ->where('customer_id', $user_id)
+            ->where('otp', $otp)
+            ->first();
+
+        return count($result);
+    }
+
 }

@@ -12,4 +12,6 @@ namespace Repo\Contracts;
 interface OTPInterface
 {
     public function saveOTP($data);
+
+    public function verifyOTP($request);
 }
