@@ -13,4 +13,6 @@ interface EventInterface
 {
     public function index($id = null);
     public function saveEvent($id = null, $request);
+    public function saveUserEvent($id = null, $request);
+    public function userEventIndex($id = null);
 }

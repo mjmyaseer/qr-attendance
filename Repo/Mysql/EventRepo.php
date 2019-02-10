@@ -8,7 +8,10 @@
 
 namespace repo\Mysql;
 
+use App\Http\Models\Customer;
 use App\Http\Models\Event;
+use App\Http\Models\User;
+use App\Http\Models\UserEvent;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Repo\Contracts\EventInterface;
@@ -17,13 +20,19 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 class EventRepo implements EventInterface
 {
     protected $event;
+    private $userEvent;
 
-    public function __construct(Event $event)
+    public function __construct(
+        Event $event,
+        UserEvent $userEvent
+    )
     {
         $this->event = $event;
+        $this->userEvent = $userEvent;
     }
 
-    public function index($id = null){
+    public function index($id = null)
+    {
         $query = DB::table(Event::TABLE)
             ->select(
                 Event::TABLE . '.id as event_id',
@@ -64,12 +73,11 @@ class EventRepo implements EventInterface
                 $event = new Event();
             }
 
-            $uid = uniqid();
-//
+            $uid = strtoupper(bin2hex(openssl_random_pseudo_bytes(16)));
+
             $event->event_name = $request->event_name;
             $event->unique_id = $uid;
             $event->date = $request->event_date;
-//            $event->qr_code = base64_encode(QrCode::format('png')->size(100)->generate($ids)
             $event->created_by = $request->session()->get('userID');
 
             if ($event->save()) {
@@ -82,7 +90,7 @@ class EventRepo implements EventInterface
                 $event['result'] = Event::all();
 
                 $update = $this->event->where('id', $event->id)->first();
-                $ids = "event_id = ".$event->id.",unique_id = ".$uid;
+                $ids = "event_id = " . $event->id . ",unique_id = " . $uid;
                 $update->qr_code = base64_encode(QrCode::format('png')->size(100)->generate($ids));
                 $update->save();
                 return $event;
@@ -108,6 +116,79 @@ class EventRepo implements EventInterface
                 Event::TABLE . '.event_code'
             )
             ->where(Event::TABLE . '.id', '=', $id);
+
+        $results = $query->get();
+
+        return $results;
+    }
+
+    public function saveUserEvent($id = null, $request)
+    {
+        try {
+            if ($id != null) {
+                $event = $this->userEvent->where('id', $id)->first();
+            } else {
+                $event = new UserEvent();
+            }
+
+            $uid = strtoupper(bin2hex(openssl_random_pseudo_bytes(16)));
+            $ids = "event_id = " . $request->event_id . ",user_id = " . $request->user_id . ",unique_id = " . $uid;
+            $event->customer_id = $request->customer_id;
+            $event->event_id = $request->event_id;
+            $event->qr_code = base64_encode(QrCode::format('png')->size(100)->generate($ids));
+            $event->created_by = $request->session()->get('userID');
+
+            if ($event->save()) {
+                $event['status'] = [
+                    'status' => 'SUCCESS',
+                    'code' => 200,
+                    'message' => Config::get('custom_messages.NEW_EVENT_ADDED')
+                ];
+
+                $event['result'] = Event::all();
+                return $event;
+            }
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+
+            return $event['status'] = [
+                'status' => 'FAILED',
+                'code' => 422,
+                'error' => Config::get('custom_messages.ERROR_WHILE_EVENT_ADDING'),
+                'message' => $e->getMessage()
+            ];
+        }
+    }
+
+    public function userEventIndex($id = null)
+    {
+
+        $query = DB::table(UserEvent::TABLE)
+            ->select(
+                UserEvent::TABLE . '.id as user_event_id',
+                UserEvent::TABLE . '.customer_id',
+                UserEvent::TABLE . '.event_id',
+                UserEvent::TABLE . '.qr_code as event_code',
+                UserEvent::TABLE . '.unique_id as event_uid',
+                Event::TABLE . '.event_name',
+                Customer::TABLE . '.customer_name',
+                UserEvent::TABLE . '.created_by as event_created_by',
+                UserEvent::TABLE . '.created_at as event_created_at',
+                UserEvent::TABLE . '.updated_at as event_updated_at')
+            ->leftJoin(Customer::TABLE, UserEvent::TABLE . '.customer_id', '=', Customer::TABLE . '.id')
+            ->leftJoin(Event::TABLE, UserEvent::TABLE . '.event_id', '=', Event::TABLE . '.id');
+        if ($id != '' && !isset($id['event_id'])) {
+            $query->where(UserEvent::TABLE . '.id', '=', $id);
+        }
+
+        if (isset($id['name']) && $id['name'] != '') {
+            $query->where(Event::TABLE . '.event_name', 'like', '%' . $id['name'] . '%');
+            $query->orwhere(Customer::TABLE . '.customer_name', 'like', '%' . $id['name'] . '%');
+            $results = $query->orderBy(Event::TABLE . '.id', 'DESC')
+                ->get();
+
+            return $results;
+        }
 
         $results = $query->get();
 

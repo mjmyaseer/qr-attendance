@@ -74,6 +74,12 @@ Route::group(['prefix' => 'secure'], function () {
         Route::post('/add-event/{id}', 'Event\EventController@saveEvent');
         Route::post('/add-event', 'Event\EventController@saveEvent');
 
+        Route::get('/userEvent', 'Event\EventController@userEventIndex');
+        Route::get('/add-userEvent', 'Event\EventController@addUserEvent');
+        Route::get('/add-userEvent/{id}', 'Event\EventController@addUserEvent');
+        Route::post('/add-userEvent/{id}', 'Event\EventController@saveUserEvent');
+        Route::post('/add-userEvent', 'Event\EventController@saveUserEvent');
+
         Route::get('/branch', 'Branch\BranchController@index');
         Route::get('/add-branch', 'Branch\BranchController@addBranch');
         Route::get('/add-branch/{id}', 'Branch\BranchController@addBranch');
@@ -97,6 +103,7 @@ Route::group(['prefix' => 'secure'], function () {
 
 //search
         Route::get('/sear-customers', "Sales\SalesController@searchSalesByCustomer");
+        Route::get('/sear-userEvent', "Event\EventController@searchEventByName");
         Route::get('/sear-cux', "Customer\CustomersController@searchByCustomerName");
         Route::get('/sear-branch', "Branch\BranchController@searchByBranchName");
         Route::get('/sear-city', "City\CityController@searchByCityName");

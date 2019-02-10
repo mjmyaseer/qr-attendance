@@ -22,8 +22,5 @@ class QRController extends Controller
     public function scanQRCode()
     {
         return QrCode::size(500)->generate('Hi Hi Hi!!');
-
-        //user_id
-        //
     }
 }
