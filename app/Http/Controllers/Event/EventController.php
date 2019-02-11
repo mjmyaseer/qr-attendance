@@ -145,4 +145,17 @@ class EventController extends Controller
 
         return \response()->json($customer);
     }
+
+    public function sendQR(Request $request)
+    {
+        $validationRules = [
+            'user_id' => 'required',
+        ];
+        $this->validate($request, $validationRules);
+        $user_id = $request->get('user_id');
+
+        $results = $this->event->getQRDetails($user_id);
+
+        return \response()->json($results);
+    }
 }

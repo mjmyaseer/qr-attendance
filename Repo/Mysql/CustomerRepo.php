@@ -110,7 +110,7 @@ class CustomerRepo implements CustomerInterface
             )
             ->where(Customer::TABLE . '.customer_nic', '=', $nic);
 
-        $results = $query->get();
+        $results = $query->first();
 
         return $results;
     }

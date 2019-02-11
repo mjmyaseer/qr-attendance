@@ -92,13 +92,13 @@ class CustomersController extends Controller
     {
         $nic = $request->get('nic');
         $customer = $this->customer->getCustomer($nic);
-        $data = $customer[0];
+
         $otp = mt_rand(1023, 9999);
 
-        if (isset($data->customer_id)) {
-            $data->otp = $otp;
+        if (isset($customer->customer_id)) {
+            $customer->otp = $otp;
 
-            $this->sendSms($data);
+            $this->sendSms($customer);
         } else {
             return $customer['status'] = [
                 'status' => 'FAILED',
@@ -109,7 +109,7 @@ class CustomersController extends Controller
         }
 
         // TODO remove otp from response
-        return \response()->json($customer[0]);
+        return \response()->json($customer);
     }
 
     private function sendSms($data)
@@ -121,6 +121,7 @@ class CustomersController extends Controller
     {
 
         $results = $this->otp->verifyOTP($request);
+
 
         if ($results == 1) {
             return response()

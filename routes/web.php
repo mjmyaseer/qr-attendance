@@ -118,6 +118,8 @@ Route::group(['prefix' => 'secureApi'], function () {
     Route::post('/check/nic', "Customer\CustomersController@getCustomer");
 
     Route::post('/check/otp', "Customer\CustomersController@verifyOtp");
+
+    Route::post('/check/qr', "Event\EventController@sendQR");
 });
 
 

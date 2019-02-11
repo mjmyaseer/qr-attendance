@@ -195,4 +195,40 @@ class EventRepo implements EventInterface
 
         return $results;
     }
+
+    public function getQRDetails($request)
+    {
+        $query = DB::table(UserEvent::TABLE)
+            ->select(
+                UserEvent::TABLE . '.id as user_event_id',
+                UserEvent::TABLE . '.customer_id',
+                UserEvent::TABLE . '.event_id',
+                UserEvent::TABLE . '.qr_code as user_event_qr',
+                UserEvent::TABLE . '.unique_id as event_uid',
+                Event::TABLE . '.event_name',
+                Event::TABLE . '.qr_code',
+                Event::TABLE . '.date as event_date',
+                Customer::TABLE . '.customer_name',
+                UserEvent::TABLE . '.created_by as event_created_by',
+                UserEvent::TABLE . '.created_at as event_created_at',
+                UserEvent::TABLE . '.updated_at as event_updated_at')
+            ->leftJoin(Customer::TABLE, UserEvent::TABLE . '.customer_id', '=', Customer::TABLE . '.id')
+            ->leftJoin(Event::TABLE, UserEvent::TABLE . '.event_id', '=', Event::TABLE . '.id')
+            ->where(UserEvent::TABLE . '.customer_id', '=', $request);
+        $results = $query->get();
+
+        $event = $this->userEvent->where('customer_id', $request)->get();
+
+
+        dd($event);
+
+
+//        $uid = strtoupper(bin2hex(openssl_random_pseudo_bytes(16)));
+//        $ids = "event_id = " . $request->event_id . ",user_id = " . $request->user_id . ",unique_id = " . $uid;
+//        $event->qr_code = base64_encode(QrCode::format('png')->size(100)->generate($ids));
+//
+//        $event->save();
+
+        return $results;
+    }
 }
