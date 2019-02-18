@@ -101,12 +101,15 @@ Route::group(['prefix' => 'secure'], function () {
         Route::get('/CUser', "User\UsersController@getupdateUser");
         Route::post('/CUser', "User\UsersController@updateCurrentUser");
 
+        Route::get('/attendance', "Attendance\AttendanceController@index");
+
 //search
         Route::get('/sear-customers', "Sales\SalesController@searchSalesByCustomer");
         Route::get('/sear-userEvent', "Event\EventController@searchEventByName");
         Route::get('/sear-cux', "Customer\CustomersController@searchByCustomerName");
         Route::get('/sear-branch', "Branch\BranchController@searchByBranchName");
         Route::get('/sear-city', "City\CityController@searchByCityName");
+        Route::get('/sear-attend', "Attendance\AttendanceController@searchByAttendance");
         Route::get('/qr-code', "QR\QRController@scanQRCode");
 
 
@@ -119,7 +122,10 @@ Route::group(['prefix' => 'secureApi'], function () {
 
     Route::post('/check/otp', "Customer\CustomersController@verifyOtp");
 
-    Route::post('/check/qr', "Event\EventController@sendQR");
+    Route::post('/check/qrCode', "Event\EventController@sendQR");
+
+    Route::post('/check/attend', "Attendance\AttendanceController@attend");
+
 });
 
 

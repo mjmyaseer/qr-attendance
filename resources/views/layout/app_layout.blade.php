@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Mobile Planet</title>
     <!-- BOOTSTRAP STYLES-->
-    <link href="{{env('URL_BASE')}}/vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="{{env('URL_BASE')}}/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- FONTAWESOME STYLES-->
-    <link href="{{env('URL_BASE')}}/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
     <!-- CUSTOM STYLES-->
     <link href="{{env('URL_BASE')}}/css/styles.css" rel="stylesheet"/>
     <!-- GOOGLE FONTS-->
@@ -38,9 +38,9 @@
 <!-- /. WRAPPER  -->
 <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
 <!-- JQUERY SCRIPTS -->
-<script src="{{env('URL_BASE')}}/vendor/jquery/dist/jquery.min.js"></script>
+<script src="{{env('URL_BASE')}}/jquery/dist/jquery.min.js"></script>
 <!-- BOOTSTRAP SCRIPTS -->
-<script src="{{env('URL_BASE')}}/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="{{env('URL_BASE')}}/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- CUSTOM SCRIPTS -->
 <script src="{{env('URL_BASE')}}/js/custom.js"></script>
 <script src="{{env('URL_BASE')}}/js/app/session.js"></script>

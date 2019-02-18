@@ -49,8 +49,8 @@ class CustomerRepo implements CustomerInterface
         if (isset($id['customer_name']) && $id['customer_name'] != '') {
 
             $query->where(Customer::TABLE . '.customer_name', 'like', '%' . $id['customer_name'] . '%');
-            $query->orwhere(Customer::TABLE . '.customer_code', 'like', '%' . $id['customer_code'] . '%');
-            $query->orwhere(Customer::TABLE . '.customer_nic', 'like', '%' . $id['customer_nic'] . '%');
+            $query->orwhere(Customer::TABLE . '.customer_nic', 'like', '%' . $id['customer_name'] . '%');
+            $query->orwhere(Customer::TABLE . '.customer_email', 'like', '%' . $id['customer_name'] . '%');
 
             $results = $query->orderBy(Customer::TABLE . '.id', 'DESC')
                 ->get();

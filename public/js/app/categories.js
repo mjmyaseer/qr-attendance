@@ -28,7 +28,7 @@ $("#submit").click(function () {
 //
 //         $.ajax({
 //             method: "POST",
-//             url: '/InventoryControl/public/secure/add-categories',
+//             url: '/qr-attendance/public/secure/add-categories',
 //             data: data
 //         }).done(function( msg ) {
 //

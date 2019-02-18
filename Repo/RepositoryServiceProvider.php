@@ -38,5 +38,10 @@ class RepositoryServiceProvider extends ServiceProvider
             \Repo\Mysql\EventRepo::class
         );
 
+        $this->app->bind(
+            \Repo\Contracts\AttendanceInterface::class,
+            \Repo\Mysql\AttendanceRepo::class
+        );
+
     }
 }

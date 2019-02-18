@@ -12,7 +12,7 @@ $("#search_button").click(function () {
 
     $.ajax({
         method: "get",
-        url: '/InventoryControl/public/secure/sear-purchasers',
+        url: '/qr-attendance/public/secure/sear-purchasers',
         data: {keyword: category}
     }).done(function (data) {
         if (data) {

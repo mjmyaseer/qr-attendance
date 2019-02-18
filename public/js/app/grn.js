@@ -4,7 +4,7 @@ $("#category").change(function () {
 
     $.ajax({
         method: "get",
-        url: '/InventoryControl/public/secure/cat-items',
+        url: '/qr-attendance/public/secure/cat-items',
         data: {id: category}
     }).done(function (data) {
         if (data) {

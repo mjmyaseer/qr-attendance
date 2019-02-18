@@ -156,6 +156,8 @@ class EventController extends Controller
 
         $results = $this->event->getQRDetails($user_id);
 
+//        $changeQr = $this->event->changeQR()
+//TODO add generating new qr code her
         return \response()->json($results);
     }
 }

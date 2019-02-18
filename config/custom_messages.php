@@ -41,5 +41,8 @@ return [
     'BRANCH_NAME_REQUIRED' => 'Branch Name required',
     'CITY_NAME_REQUIRED' => 'City Name required',
 
+    'ATTENDANCE_MARKED' => 'Attendance Marked',
+    'ERROR_WHILE_MARKING_ATTENDANCE' => 'Error While Marking Attendance',
+
     'CREATE_ERROR' => 'Problem Processing Request, Please Try Again'
 ];

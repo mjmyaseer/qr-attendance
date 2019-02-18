@@ -13,7 +13,7 @@ $("#search_button").click(function () {
 
     $.ajax({
         method: "get",
-        url: '/attendance/public/secure/sear-city',
+        url: '/qr-attendance/public/secure/sear-city',
         data: {keyword: category}
     }).done(function (data) {
         if (data) {
@@ -36,7 +36,7 @@ $("#search_button").click(function () {
                     "<td>" + cal + "</td>" +
                     "<td>" + city_name + "</td>" +
                     "<td style='text-align: center'>" +
-                    "<a href='/attendance/public/secure/add-city/"+ id +"'>Edit</a></td>";
+                    "<a href='/qr-attendance/public/secure/add-city/"+ id +"'>Edit</a></td>";
                 cal ++;
             });
             $('#example').append(selOpts);

@@ -3,9 +3,9 @@
 <head>
     <title>Mobile Planet</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{{env('URL_BASE')}}/vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="{{env('URL_BASE')}}/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <!-- FONTAWESOME STYLES-->
-    <link href="{{env('URL_BASE')}}/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" />
     <!-- styles -->
     <link href="{{env('URL_BASE')}}/css/styles.css" rel="stylesheet">
 
@@ -38,9 +38,9 @@
 
 <!-- /. WRAPPER  -->
 <!-- JQUERY SCRIPTS -->
-<script src="{{env('URL_BASE')}}/vendor/jquery/dist/jquery.min.js"></script>
+<script src="{{env('URL_BASE')}}/jquery/dist/jquery.min.js"></script>
 <!-- BOOTSTRAP SCRIPTS -->
-<script src="{{env('URL_BASE')}}/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="{{env('URL_BASE')}}/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="{{env('URL_BASE')}}/js/custom.js"></script>
 <script src="{{env('URL_BASE')}}/js/app/session.js"></script>
 
