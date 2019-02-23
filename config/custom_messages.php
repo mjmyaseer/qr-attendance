@@ -31,7 +31,7 @@ return [
     'TOKEN_REQUIRED' => 'This url has been authenticated. You need to pass token with this route',
     'INVALID_TOKEN' => 'Invalid authentication token',
     'INVALID_NIC' => 'Invalid User',
-    'INVALID_OTP' => 'Invalid OTP',
+    'INVALID_OTP' => 'Invalid Credentials',
 
     'NEW_CITY_ADDED' => 'New City Added to the system',
     'NEW_BRANCH_ADDED' => 'New Branch Added to the system',

@@ -5,7 +5,7 @@
                 <!-- Logo -->
                 <div class="logo">
 
-                    <h1><a href="{{url('/secure/dashboard.html')}}">Mobile Planet</a></h1>
+                    <h1><a href="{{url('/secure/dashboard.html')}}">Attendance</a></h1>
                 </div>
             </div>
             <div class="col-md-2">

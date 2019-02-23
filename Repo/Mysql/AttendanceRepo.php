@@ -65,12 +65,11 @@ class AttendanceRepo implements AttendanceInterface
         return $results;
     }
 
-    public function markAttend($data){
+    public function markAttend($data)
+    {
         try {
 
-                $attend = new Attendance();
-
-
+            $attend = new Attendance();
             $attend->customer_id = $data['user_id'];
             $attend->event_id = $data['event_id'];
             $attend->attended_date = date("Y-m-d H:i:s");

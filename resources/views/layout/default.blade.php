@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Mobile Planet</title>
+    <title>Attendance</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{env('URL_BASE')}}/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <!-- FONTAWESOME STYLES-->
@@ -23,7 +23,7 @@
             <div class="col-md-12">
                 <!-- Logo -->
                 <div class="logo">
-                    <h1><a href="/">Mobile Planet</a></h1>
+                    <h1><a href="/">Attendance</a></h1>
                 </div>
             </div>
         </div>

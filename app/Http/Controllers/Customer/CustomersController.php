@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Customer;
 
+use App\Http\Controllers\SMSController;
 use App\Http\Models\Customer;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Config;
@@ -16,14 +17,26 @@ class CustomersController extends Controller
 {
     private $customer;
     private $otp;
+    /**
+     * @var SMSController
+     */
+    private $SMSController;
 
+    /**
+     * CustomersController constructor.
+     * @param CustomerInterface $customer
+     * @param OTPInterface $otp
+     * @param SMSController $SMSController
+     */
     public function __construct(
         CustomerInterface $customer,
-        OTPInterface $otp
+        OTPInterface $otp,
+        SMSController $SMSController
     )
     {
         $this->customer = $customer;
         $this->otp = $otp;
+        $this->SMSController = $SMSController;
     }
 
     public function index()
@@ -98,7 +111,11 @@ class CustomersController extends Controller
         if (isset($customer->customer_id)) {
             $customer->otp = $otp;
 
-            $this->sendSms($customer);
+            $smsDetails = [];
+            $smsDetails['phone'] = $customer->phone;
+            $smsDetails['message'] = $customer->otp;
+            $this->saveOTP($customer);
+            $this->SMSController->sendSMS($smsDetails);
         } else {
             return $customer['status'] = [
                 'status' => 'FAILED',
@@ -108,11 +125,10 @@ class CustomersController extends Controller
             ];
         }
 
-        // TODO remove otp from response
         return \response()->json($customer);
     }
 
-    private function sendSms($data)
+    private function saveOTP($data)
     {
         $this->otp->saveOTP($data);
     }
@@ -123,12 +139,12 @@ class CustomersController extends Controller
         $results = $this->otp->verifyOTP($request);
 
 
-        if ($results == 1) {
+        if (isset($results->id) && ($results->id != null)) {
             return response()
-                ->make('',204);
+                ->make('', 204);
         } else {
             return response()
-                ->make(Config::get('custom_messages.INVALID_OTP'),403);
+                ->make(Config::get('custom_messages.INVALID_OTP'), 403);
         }
 
     }

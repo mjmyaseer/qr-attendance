@@ -33,7 +33,11 @@ class EventRepo implements EventInterface
 
     public function index($id = null)
     {
-        $query = DB::table(Event::TABLE)
+//        print_r($id['event_id']);
+//        print_r($id['user_id']);
+//        dd($id);
+
+        $query = DB::table(UserEvent::TABLE)
             ->select(
                 Event::TABLE . '.id as event_id',
                 Event::TABLE . '.event_name',
@@ -42,9 +46,15 @@ class EventRepo implements EventInterface
                 Event::TABLE . '.date as event_date',
                 Event::TABLE . '.created_by as event_created_by',
                 Event::TABLE . '.created_at as event_created_at',
-                Event::TABLE . '.updated_at as event_updated_at');
+                Event::TABLE . '.updated_at as event_updated_at')
+        ->leftjoin(Event::TABLE,UserEvent::TABLE . '.event_id','=',Event::TABLE.'.id')
+        ->leftjoin(Customer::TABLE ,UserEvent::TABLE . '.customer_id','=',Customer::TABLE.'.id');
         if ($id != '' && !isset($id['event_id'])) {
-            $query->where(Event::TABLE . '.id', '=', $id);
+            $query->where(Event::TABLE . '.id', '=', $id['event_id']);
+        }
+
+        if ($id != '' && isset($id['user_id'])) {
+            $query->where(UserEvent::TABLE . '.customer_id', '=', $id['user_id']);
         }
 
         if (isset($id['event_name']) && $id['event_name'] != '') {
@@ -60,7 +70,6 @@ class EventRepo implements EventInterface
         }
 
         $results = $query->get();
-
         return $results;
     }
 
@@ -130,7 +139,7 @@ class EventRepo implements EventInterface
             } else {
                 $event = new UserEvent();
             }
-//dd($request->customer_id);
+
             $uid = strtoupper(bin2hex(openssl_random_pseudo_bytes(16)));
             $ids = "event_id = " . $request->event_id . ",user_id = " . $request->user_id . ",unique_id = " . $uid;
             $event->customer_id = $request->customer_id;

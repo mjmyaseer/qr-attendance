@@ -9,7 +9,11 @@
             <div class="content-box-large">
                 <div class="panel-heading">
                     <div class="panel-title">Attendance</div>
-
+                    <div class="panel-options">
+                        <a href="{{url('/secure/add-branch')}}"
+                           data-rel="collapse">Mark Manual Attendance</a>
+                        <a href="#" data-rel="reload"><i class="glyphicon glyphicon-refresh"></i></a>
+                    </div>
                     <div class="panel-options">
                         <a href="." data-rel="reload"><i class="glyphicon glyphicon-refresh"></i></a>
                     </div>
@@ -47,19 +51,19 @@
 @php
 $x = 1;
 @endphp
-                        @foreach($attendance as $key=>$attendances)
-                            <tr class="gradeX">
-                                <td>{{$x}}</td>
-                                <td>{{$attendances->customer_name}}</td>
-                                <td>{{$attendances->event_name}}</td>
-                                <td>{{$attendances->customer_nic}}</td>
-                                <td>{{$attendances->customer_telephone}}</td>
-                                <td>{{$attendances->attended_date}}</td>
-                            </tr>
-                            @php
-                                $x++;
-                            @endphp
-                        @endforeach
+                        {{--@foreach($attendance as $key=>$attendances)--}}
+                            {{--<tr class="gradeX">--}}
+                                {{--<td>{{$x}}</td>--}}
+                                {{--<td>{{$attendances->customer_name}}</td>--}}
+                                {{--<td>{{$attendances->event_name}}</td>--}}
+                                {{--<td>{{$attendances->customer_nic}}</td>--}}
+                                {{--<td>{{$attendances->customer_telephone}}</td>--}}
+                                {{--<td>{{$attendances->attended_date}}</td>--}}
+                            {{--</tr>--}}
+                            {{--@php--}}
+                                {{--$x++;--}}
+                            {{--@endphp--}}
+                        {{--@endforeach--}}
 
 
                         </tbody>

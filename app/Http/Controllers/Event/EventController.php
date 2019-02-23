@@ -156,8 +156,35 @@ class EventController extends Controller
 
         $results = $this->event->getQRDetails($user_id);
 
-//        $changeQr = $this->event->changeQR()
-//TODO add generating new qr code her
+
         return \response()->json($results);
+    }
+
+    public function getUserEvents(Request $request)
+    {
+
+//        $validationRules = [
+//            'user_id' => 'required',
+//        ];
+//
+//        if (!isset($request['user_id'])) {
+//
+//            $validationRules['user_id'] = 'required';
+//
+//        }elseif (isset($request['event_id'])){
+//
+//            $validationRules['customer_code'] = 'required';
+//        }
+//
+//        $this->validate($request, $validationRules);
+
+        $keyword = [];
+//        dd($keyword);
+        $keyword['user_id'] = $request->get('user_id');
+        $keyword['event_id'] = $request->get('event_id');
+
+        $event = $this->event->index($keyword);
+
+        return $event;
     }
 }

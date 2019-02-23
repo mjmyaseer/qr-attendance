@@ -238,7 +238,7 @@ footer .copy{
 }
 
 .content-box-header {
-  min-height: 40px;
+    min-height: 40px;
    font-size: 16px;
    background:#f5f5f5;
    border-top-left-radius:5px;
@@ -254,9 +254,13 @@ footer .copy{
 }
 
 .sidebar ul.nav, .sidebar ul.nav ul{
-	list-style: none;
-	padding: 0px;
-	margin: 0px;
+	list-style: square;
+    white-space: nowrap;
+	/*padding: 10px;*/
+	margin: 10px;
+    float: none;
+    padding: 10px 60px 0px 25px;
+
 }
 
 .sidebar ul.nav ul {
@@ -287,7 +291,7 @@ footer .copy{
 }
 
 .sidebar .nav > li > a {
-	font-size: 14px;
+	font-size: 18px;
 	line-height: 20px;
 	padding: 15px 15px;
 	color: #999;
@@ -557,6 +561,8 @@ body {
     float: left;
     padding: 10px 15px;
     padding-top: 0px;
+    font-size: large;
+    font-weight: bold;
 }
 
 .panel-heading>.panel-title>*, .content-box-header .panel-title>* {

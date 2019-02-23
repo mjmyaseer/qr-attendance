@@ -26,7 +26,7 @@ Route::post('/sign-in.html', "Auth\LoginController@doLogin");
 Route::post('api/sign-in', "Auth\LoginController@doLogin");
 Route::get('logout', "Auth\LoginController@doLogout");
 //Route::post('check/otp', "Customer\CustomersController@verifyOtp");
-//Route::post('check/otp', function (){
+//Route::post('otp', function (){
 //    dd(11);
 //});
 
@@ -120,11 +120,19 @@ Route::group(['prefix' => 'secureApi'], function () {
     //check nic and send otp
     Route::post('/check/nic', "Customer\CustomersController@getCustomer");
 
+    //check otp and send 204 success
     Route::post('/check/otp', "Customer\CustomersController@verifyOtp");
 
+    //receive user_id and send all events the user is registered
+    Route::post('/check/getUserEvents', "Event\EventController@getUserEvents");
+
+    //
     Route::post('/check/qrCode', "Event\EventController@sendQR");
 
+
     Route::post('/check/attend', "Attendance\AttendanceController@attend");
+
+
 
 });
 

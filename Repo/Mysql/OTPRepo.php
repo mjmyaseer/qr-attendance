@@ -43,7 +43,7 @@ class OTPRepo implements OTPInterface
             ->where('otp', $otp)
             ->first();
 
-        return count($result);
+        return $result;
     }
 
 }

@@ -11,6 +11,7 @@
         "laracasts/flash": "^3.0",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
+        "shoutoutlabs/shoutout-sdk": "^3.0",
         "simplesoftwareio/simple-qrcode": "^2.0",
         "twbs/bootstrap": "4.3.1"
     },

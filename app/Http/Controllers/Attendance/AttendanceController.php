@@ -35,7 +35,7 @@ class AttendanceController extends Controller
     {
         $attendance = $this->attendance->index();
 
-        return view('attendance.index')->with('attendance', $attendance);
+        return view('attendance.index');
     }
 
     /**
@@ -68,7 +68,8 @@ class AttendanceController extends Controller
         $data['user_id'] = $user;
         $data['event_id'] = $event;
 
-        $result = $this->attendance->markAttend($data);
+        $result =
+        $attend = $this->attendance->markAttend($data);
 
         if ($result['state']==1){
             return response()
@@ -79,3 +80,4 @@ class AttendanceController extends Controller
         }
     }
 }
+

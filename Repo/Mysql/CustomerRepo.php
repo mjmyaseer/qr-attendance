@@ -106,7 +106,9 @@ class CustomerRepo implements CustomerInterface
     public function getCustomer($nic)
     {
         $query = DB::table(Customer::TABLE)
-            ->select(Customer::TABLE . '.id as customer_id'
+            ->select(
+                Customer::TABLE . '.id as customer_id',
+                Customer::TABLE . '.customer_telephone as phone'
             )
             ->where(Customer::TABLE . '.customer_nic', '=', $nic);
 
