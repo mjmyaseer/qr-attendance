@@ -32,6 +32,7 @@ return [
     'INVALID_TOKEN' => 'Invalid authentication token',
     'INVALID_NIC' => 'Invalid User',
     'INVALID_OTP' => 'Invalid Credentials',
+    'INVALID_EVENT_DETAILS' => 'Invalid Event Details',
 
     'NEW_CITY_ADDED' => 'New City Added to the system',
     'NEW_BRANCH_ADDED' => 'New Branch Added to the system',

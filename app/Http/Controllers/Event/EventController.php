@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Event;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Redirect;
 use Repo\Contracts\CustomerInterface;
 use Repo\Contracts\EventInterface;
@@ -157,7 +158,13 @@ class EventController extends Controller
         $results = $this->event->getQRDetails($user_id);
 
 
-        return \response()->json($results);
+        if (isset($results->id) && ($results->id != null)) {
+            return response()
+                ->make('', 204);
+        } else {
+            return response()
+                ->make(Config::get('custom_messages.INVALID_EVENT_DETAILS'), 403);
+        }
     }
 
     public function getUserEvents(Request $request)
