@@ -153,9 +153,14 @@ class EventController extends Controller
             'user_id' => 'required',
         ];
         $this->validate($request, $validationRules);
-        $user_id = $request->get('user_id');
 
-        $results = $this->event->getQRDetails($user_id);
+        $data = [
+            'user_id' => $request->get('user_id'),
+            'event_id' => $request->get('event_id'),
+            'token' => $request->get('token')
+        ];
+
+        $results = $this->event->getQRDetails($data);
 
 
         if (isset($results->id) && ($results->id != null)) {
