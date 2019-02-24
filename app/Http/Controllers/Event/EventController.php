@@ -162,41 +162,12 @@ class EventController extends Controller
 
         $results = $this->event->getQRDetails($data);
 
-
-        if (isset($results->customer_id) && ($results->customer_id != null)) {
+        if (count($results) != 0) {
             return response()
                 ->make('', 204);
         } else {
             return response()
                 ->make(Config::get('custom_messages.INVALID_EVENT_DETAILS'), 403);
         }
-    }
-
-    public function getUserEvents(Request $request)
-    {
-
-//        $validationRules = [
-//            'user_id' => 'required',
-//        ];
-//
-//        if (!isset($request['user_id'])) {
-//
-//            $validationRules['user_id'] = 'required';
-//
-//        }elseif (isset($request['event_id'])){
-//
-//            $validationRules['customer_code'] = 'required';
-//        }
-//
-//        $this->validate($request, $validationRules);
-
-        $keyword = [];
-//        dd($keyword);
-        $keyword['user_id'] = $request->get('user_id');
-        $keyword['event_id'] = $request->get('event_id');
-
-        $event = $this->event->index($keyword);
-
-        return $event;
     }
 }
