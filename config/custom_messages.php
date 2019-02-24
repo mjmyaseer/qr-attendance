@@ -17,6 +17,8 @@ return [
     'NEW_CAT_ADDED' => 'New Category Added to the system',
     'NEW_EVENT_ADDED' => 'New Event Added to the system',
     'ERROR_WHILE_EVENT_ADDING' => 'Error while creating new event',
+    'FOLLOWING_OTP' => 'Please use the following OTP ',
+    'COMPLETE_REQUEST' => ' to complete your request',
 
     //AUTHENTICATION
     'FIRST_NAME_REQUIRED' => 'First Name required',

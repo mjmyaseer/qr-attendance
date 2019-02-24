@@ -170,4 +170,30 @@ class EventController extends Controller
                 ->make(Config::get('custom_messages.INVALID_EVENT_DETAILS'), 403);
         }
     }
+
+    public function getUserEvents(Request $request)
+    {
+
+        $validationRules = [];
+
+        if (isset($request['user_id'])) {
+
+            $validationRules['user_id'] = 'required';
+
+        }if (isset($request['event_id'])){
+
+            $validationRules['event_id'] = 'required';
+        }
+
+        $this->validate($request, $validationRules);
+
+        $keyword = [];
+        $keyword['user_id'] = $request->get('user_id');
+        $keyword['event_id'] = $request->get('event_id');
+
+        $event = $this->event->index($keyword);
+
+        return $event;
+    }
+
 }

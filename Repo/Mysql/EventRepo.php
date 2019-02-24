@@ -33,24 +33,19 @@ class EventRepo implements EventInterface
 
     public function index($id = null)
     {
-//        print_r($id['event_id']);
-//        print_r($id['user_id']);
-//        dd($id);
-
         $query = DB::table(UserEvent::TABLE)
             ->select(
                 Event::TABLE . '.id as event_id',
                 Event::TABLE . '.event_name',
                 Event::TABLE . '.qr_code as event_code',
-                Event::TABLE . '.unique_id as event_uid',
                 Event::TABLE . '.date as event_date',
                 Event::TABLE . '.created_by as event_created_by',
                 Event::TABLE . '.created_at as event_created_at',
                 Event::TABLE . '.updated_at as event_updated_at')
         ->leftjoin(Event::TABLE,UserEvent::TABLE . '.event_id','=',Event::TABLE.'.id')
         ->leftjoin(Customer::TABLE ,UserEvent::TABLE . '.customer_id','=',Customer::TABLE.'.id');
-        if ($id != '' && !isset($id['event_id'])) {
-            $query->where(Event::TABLE . '.id', '=', $id['event_id']);
+        if ($id != '' && isset($id['event_id'])) {
+            $query->where(UserEvent::TABLE . '.event_id', '=', $id['event_id']);
         }
 
         if ($id != '' && isset($id['user_id'])) {

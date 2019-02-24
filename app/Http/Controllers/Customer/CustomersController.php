@@ -111,21 +111,27 @@ class CustomersController extends Controller
         if (isset($customer->customer_id)) {
             $customer->otp = $otp;
 
+
             $smsDetails = [];
             $smsDetails['phone'] = $customer->phone;
-            $smsDetails['message'] = $customer->otp;
+            $smsDetails['message'] =
+                Config::get('custom_messages.FOLLOWING_OTP').$customer->otp .
+                Config::get('custom_messages.COMPLETE_REQUEST');
             $this->saveOTP($customer);
             $this->SMSController->sendSMS($smsDetails);
-        } else {
-            return $customer['status'] = [
-                'status' => 'FAILED',
-                'code' => 403,
-                'error' => Config::get('custom_messages.INVALID_NIC'),
-                'message' => 'Invalid User'
+
+
+            $results = [
+                'customer_id'=>$customer->customer_id,
+                'phone'=>$customer->phone,
             ];
+        } else {
+            return response()
+                ->make(Config::get('custom_messages.INVALID_NIC'), 403);
         }
 
-        return \response()->json($customer);
+
+        return \response()->json($results);
     }
 
     private function saveOTP($data)

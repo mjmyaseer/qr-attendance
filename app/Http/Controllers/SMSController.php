@@ -24,7 +24,7 @@ class SMSController extends Controller
         $message = $data['message'];
 
         $payload = [
-            "source" => "ShoutDEMO",
+            "source" => "SLJI",
             "destinations"=> ["+94".$phone.""],
             "content"=> [
                 "sms"=>"".$message.""

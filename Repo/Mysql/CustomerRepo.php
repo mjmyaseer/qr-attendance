@@ -88,7 +88,7 @@ class CustomerRepo implements CustomerInterface
                     'message' => Config::get('custom_messages.NEW_CUSTOMER_ADDED')
                 ];
 
-                $customer['result'] = Customer::all();;
+                $customer['result'] = Customer::all();
                 return $customer;
             }
         } catch (Exception $e) {
