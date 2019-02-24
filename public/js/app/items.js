@@ -7,7 +7,7 @@
     //
     //     $.ajax({
     //         method: "POST",
-    //         url: '/qr-attendance/public/secure/add-items',
+    //         url: '/secure/add-items',
     //         data: data,
     //         headers: { 'token': session.get().token }
     //     }).done(function( msg ) {

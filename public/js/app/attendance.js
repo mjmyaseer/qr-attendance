@@ -10,10 +10,9 @@ $("#search_button").click(function () {
     }
 
 
-
     $.ajax({
         method: "get",
-        url: '/qr-attendance/public/secure/sear-attend',
+        url: '/secure/sear-attend',
         data: {keyword: customer}
     }).done(function (data) {
         if (data) {

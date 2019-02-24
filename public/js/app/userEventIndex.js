@@ -12,7 +12,7 @@ $("#search_button").click(function () {
 
     $.ajax({
         method: "get",
-        url: '/qr-attendance/public/secure/sear-userEvent',
+        url: '/secure/sear-userEvent',
         data: {keyword: category}
     }).done(function (data) {
 
@@ -39,7 +39,7 @@ $("#search_button").click(function () {
                     "<td>" + customer_name + "</td>" +
                     "<td>" + created_by + "</td>" +
                     "<td style='text-align: center'>" +
-                    "<a href='/qr-attendance/public/secure/add-userEvent/"+ id +"'>Edit</a></td>";
+                    "<a href='/secure/add-userEvent/"+ id +"'>Edit</a></td>";
                 cal ++;
             });
             $('#example').append(selOpts);

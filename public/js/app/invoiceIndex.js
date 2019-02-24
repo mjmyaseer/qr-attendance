@@ -12,7 +12,7 @@ $("#search_button").click(function () {
 
     $.ajax({
         method: "get",
-        url: '/qr-attendance/public/secure/sear-customers',
+        url: '/secure/sear-customers',
         data: {keyword: category}
     }).done(function (data) {
         if (data) {

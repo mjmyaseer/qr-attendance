@@ -11,7 +11,7 @@ $("#search_button").click(function () {
 
     $.ajax({
         method: "get",
-        url: '/qr-attendance/public/secure/sear-supp',
+        url: '/secure/sear-supp',
         data: {keyword: category}
     }).done(function (data) {
         if (data) {
@@ -45,7 +45,7 @@ $("#search_button").click(function () {
                     "<td>" + supplier_telephone + "</td>" +
                     "<td>" + supplier_address + "</td>" +
                     "<td style='text-align: center'>" +
-                    "<a href='/qr-attendance/public/secure/add-suppliers/"+ id +"'>Edit</a></td>";
+                    "<a href='/secure/add-suppliers/"+ id +"'>Edit</a></td>";
                 cal ++;
             });
             $('#example').append(selOpts);

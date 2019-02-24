@@ -13,7 +13,7 @@ $("#search_button").click(function () {
 
     $.ajax({
         method: "get",
-        url: '/qr-attendance/public/secure/sear-cux',
+        url: '/secure/sear-cux',
         data: {keyword: category}
     }).done(function (data) {
         if (data) {
@@ -47,7 +47,7 @@ $("#search_button").click(function () {
                     "<td>" + customer_telephone + "</td>" +
                     "<td>" + customer_address + "</td>" +
                     "<td style='text-align: center'>" +
-                    "<a href='/qr-attendance/public/secure/add-customers/"+ id +"'>Edit</a></td>";
+                    "<a href='/secure/add-customers/"+ id +"'>Edit</a></td>";
                 cal ++;
             });
             $('#example').append(selOpts);
