@@ -114,9 +114,7 @@ class CustomersController extends Controller
 
             $smsDetails = [];
             $smsDetails['phone'] = $customer->phone;
-            $smsDetails['message'] =
-                Config::get('custom_messages.FOLLOWING_OTP').$customer->otp .
-                Config::get('custom_messages.COMPLETE_REQUEST');
+            $smsDetails['message'] = 'Please use the following OTP '.$customer->otp .' to complete your request';
             $this->saveOTP($customer);
             $this->SMSController->sendSMS($smsDetails);
 
