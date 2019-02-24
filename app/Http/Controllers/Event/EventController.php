@@ -163,7 +163,7 @@ class EventController extends Controller
         $results = $this->event->getQRDetails($data);
 
 
-        if (isset($results->id) && ($results->id != null)) {
+        if (isset($results->customer_id) && ($results->customer_id != null)) {
             return response()
                 ->make('', 204);
         } else {

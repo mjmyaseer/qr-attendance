@@ -208,6 +208,8 @@ class EventRepo implements EventInterface
 
     public function getQRDetails($data)
     {
+        DB::enableQueryLog();
+
         $query = DB::table(UserEvent::TABLE)
             ->select(
                 UserEvent::TABLE . '.id as user_event_id',
@@ -228,6 +230,9 @@ class EventRepo implements EventInterface
             ->where(UserEvent::TABLE . '.event_id', '=', $data['event_id'])
             ->where(UserEvent::TABLE . '.unique_id', '=', $data['token']);
         $results = $query->get();
+        dd(
+            DB::getQueryLog()
+        );
         return $results;
     }
 }
