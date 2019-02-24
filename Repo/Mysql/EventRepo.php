@@ -226,12 +226,8 @@ class EventRepo implements EventInterface
             ->where(UserEvent::TABLE . '.customer_id', '=', $request);
         $results = $query->get();
 
-        $event = $this->userEvent->where('customer_id', $request)->get();
-
-
-        dd($event);
-
-
+//        $event = $this->userEvent->where('customer_id', $request)->get();
+//        dd($event);
 //        $uid = strtoupper(bin2hex(openssl_random_pseudo_bytes(16)));
 //        $ids = "event_id = " . $request->event_id . ",user_id = " . $request->user_id . ",unique_id = " . $uid;
 //        $event->qr_code = base64_encode(QrCode::format('png')->size(100)->generate($ids));
