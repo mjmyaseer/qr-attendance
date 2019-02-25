@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Redirect;
+use Repo\Contracts\AttendanceInterface;
 use Repo\Contracts\CustomerInterface;
 use Repo\Contracts\EventInterface;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -26,19 +27,26 @@ class EventController extends Controller
      * @var CustomerInterface
      */
     private $customer;
+    /**
+     * @var AttendanceInterface
+     */
+    private $attendance;
 
     /**
      * EventController constructor.
      * @param EventInterface $event
      * @param CustomerInterface $customer
+     * @param AttendanceInterface $attendance
      */
     public function __construct(
         EventInterface $event,
-        CustomerInterface $customer)
+        CustomerInterface $customer,
+        AttendanceInterface $attendance)
     {
 
         $this->event = $event;
         $this->customer = $customer;
+        $this->attendance = $attendance;
     }
 
     public function index()
@@ -161,8 +169,9 @@ class EventController extends Controller
         ];
 
         $results = $this->event->getQRDetails($data);
+        $attend = $this->attendance->markAttend($data);
 
-        if (count($results) != 0) {
+        if ($attend['state'] == 1) {
             return response()
                 ->make('', 204);
         } else {
@@ -180,7 +189,8 @@ class EventController extends Controller
 
             $validationRules['user_id'] = 'required';
 
-        }if (isset($request['event_id'])){
+        }
+        if (isset($request['event_id'])) {
 
             $validationRules['event_id'] = 'required';
         }

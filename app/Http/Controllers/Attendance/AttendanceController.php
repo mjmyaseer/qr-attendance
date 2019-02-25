@@ -68,7 +68,20 @@ class AttendanceController extends Controller
         $data['user_id'] = $user;
         $data['event_id'] = $event;
 
-        $result =
+        $attend = $this->attendance->markAttend($data);
+
+        if ($result['state']==1){
+            return response()
+                ->make('',204);
+        }elseif ($result['state']==2){
+            return response()
+                ->make(Config::get('custom_messages.ERROR_WHILE_MARKING_ATTENDANCE'),403);
+        }
+    }
+
+    public function markAttend(Request $request)
+    {
+
         $attend = $this->attendance->markAttend($data);
 
         if ($result['state']==1){
