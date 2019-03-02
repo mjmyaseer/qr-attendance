@@ -13,6 +13,7 @@ return [
     'NEW_CUSTOMER_ADDED' => 'New Customer Added to the system',
     'ERROR_WHILE_CUSTOMER_ADDING' => 'Oops there is some thing wrong please check and re submit',
     'CUSTOMER_CODE_REQUIRED' => 'Customer Code required',
+    'NIC_REQUIRED' => 'NIC required',
     'CAT_TITLE_REQUIRED' => 'Title required',
     'NEW_CAT_ADDED' => 'New Category Added to the system',
     'NEW_EVENT_ADDED' => 'New Event Added to the system',

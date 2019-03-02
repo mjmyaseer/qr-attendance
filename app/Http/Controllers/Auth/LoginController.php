@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Models\AuthToken;
+use App\Http\Models\Customer;
 use App\Http\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -109,5 +110,61 @@ class LoginController extends Controller
         $request->session()->flush();
 
         return Redirect::to('sign-in.html');
+    }
+
+    public function doSession(Request $request)
+    {
+
+//        dd($request->header('X-CSRF-TOKEN'));
+
+        if (!$request->has('email')) {
+            return response()->json([
+                'status' => 'FAILED',
+                'error' => Config::get('custom_messages.EMAIL_REQUIRED')
+            ]);
+
+        }
+        if (!$request->has('nic')) {
+            return response()->json([
+                'status' => 'FAILED',
+                'error' => Config::get('custom_messages.NIC_REQUIRED')
+            ]);
+
+        }
+
+        $user = new Customer();
+
+        $existingUser = $user->getUserByEmail($request->email);
+
+        if ($existingUser == NULL) {
+            return response()->json([
+                'status' => 'FAILED',
+                'error' => Config::get('custom_messages.USER_DOES_NOT_EXIST')
+            ]);
+        }
+
+        $request->session()->put('userFirstName', $existingUser->first_name);
+        $request->session()->put('userLastName', $existingUser->last_name);
+        $request->session()->put('userID', $existingUser->id);
+        $request->session()->put('email', $existingUser->email);
+        $request->session()->put('role', $existingUser->role);
+
+        $auth_token = new AuthToken();
+        $auth_token->user_id = $existingUser->id;
+        $auth_token->token = $request->session()->token();
+        $auth_token->save();
+
+        unset($existingUser->id);
+        unset($existingUser->created_at);
+        unset($existingUser->updated_at);
+        unset($existingUser->password);
+        unset($existingUser->email);
+
+        $existingUser->token = $auth_token->token;
+
+        return response()->json([
+            'status' => 'SUCCESS',
+            'token' => $existingUser->token
+        ]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Customer;
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\SMSController;
 use App\Http\Models\Customer;
 use Illuminate\Http\Response;
@@ -21,22 +22,29 @@ class CustomersController extends Controller
      * @var SMSController
      */
     private $SMSController;
+    /**
+     * @var LoginController
+     */
+    private $loginController;
 
     /**
      * CustomersController constructor.
      * @param CustomerInterface $customer
      * @param OTPInterface $otp
      * @param SMSController $SMSController
+     * @param LoginController $loginController
      */
     public function __construct(
         CustomerInterface $customer,
         OTPInterface $otp,
-        SMSController $SMSController
+        SMSController $SMSController,
+        LoginController $loginController
     )
     {
         $this->customer = $customer;
         $this->otp = $otp;
         $this->SMSController = $SMSController;
+        $this->loginController = $loginController;
     }
 
     public function index()
@@ -103,6 +111,7 @@ class CustomersController extends Controller
 
     public function getCustomer(Request $request)
     {
+
         $nic = $request->get('nic');
         $customer = $this->customer->getCustomer($nic);
 
@@ -139,13 +148,17 @@ class CustomersController extends Controller
 
     public function verifyOtp(Request $request)
     {
-
         $results = $this->otp->verifyOTP($request);
 
-
         if (isset($results->id) && ($results->id != null)) {
-            return response()
-                ->make('', 204);
+            $customer = $this->customer->index($results->customer_id);
+
+            $request->merge(['email' => $customer[0]->customer_email]);
+            $request->merge(['nic' => $customer[0]->customer_nic]);
+
+            $result = $this->loginController->doSession($request);
+//            $return = []
+            return \response()->json($result->original);
         } else {
             return response()
                 ->make(Config::get('custom_messages.INVALID_OTP'), 403);

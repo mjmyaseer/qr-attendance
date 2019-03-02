@@ -120,9 +120,12 @@ Route::group(['prefix' => 'secureApi'], function () {
     //check nic and send otp
     Route::post('/check/nic', "Customer\CustomersController@getCustomer");
 
-    //check otp and send 204 success
+    //check otp and send 200 success
     Route::post('/check/otp', "Customer\CustomersController@verifyOtp");
 
+});
+
+Route::group(['prefix' => 'secured'], function () {
     //receive user_id and send all events the user is registered
     Route::post('/check/getUserEvents', "Event\EventController@getUserEvents");
 
@@ -131,9 +134,6 @@ Route::group(['prefix' => 'secureApi'], function () {
 
 
     Route::post('/check/attend', "Attendance\AttendanceController@attend");
-
-
-
 });
 
 

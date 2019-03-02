@@ -12,4 +12,16 @@ class Customer extends Model
     {
      $this->hasMany('Item');
     }
+
+    public function getUserByEmail($email){
+
+        try{
+            return self::where('customer_email',$email)->first();
+
+        }catch(Exception $e){
+
+            Log::error($e->getMessage());
+            return NULL;
+        }
+    }
 }

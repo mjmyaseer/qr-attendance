@@ -35,6 +35,7 @@ class OTPRepo implements OTPInterface
 
     public function verifyOTP($request)
     {
+//        dd($request->user_id);
         $otp = $request->otp;
         $user_id = $request->user_id;
 
