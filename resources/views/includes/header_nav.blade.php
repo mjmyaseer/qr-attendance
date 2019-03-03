@@ -1,30 +1,28 @@
-<div class="header">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-10">
-                <!-- Logo -->
-                <div class="logo">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{{url('/secure/dashboard.html')}}">Attendance</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-                    <h1><a href="{{url('/secure/dashboard.html')}}">Attendance</a></h1>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="navbar navbar-inverse" role="banner">
-                    <nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
-                        <ul class="nav navbar-nav">
-                            <?php
-        ?>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account <b class="caret"></b></a>
-                                <ul class="dropdown-menu animated fadeInUp">
-                                    <li><a href="{{url('secure/CUser/')}}">Profile</a></li>
-                                    <li><a href="{{url('/logout')}}">Logout</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </div>
+    <div id="navbarNavDropdown" class="navbar-collapse collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+
+            </li>
+            <li class="nav-item">
+            </li>
+            <li class="nav-item">
+            </li>
+
+        </ul>
+        <ul class="navbar-nav">
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('/logout') }}">Logout</a>
+            </li>
+        </ul>
     </div>
-</div>
+
+
+
+</nav>

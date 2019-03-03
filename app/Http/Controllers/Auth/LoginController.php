@@ -99,7 +99,7 @@ class LoginController extends Controller
 
         $existingUser->token = $auth_token->token;
 
-        return Redirect::to('secure/dashboard.html');
+        return Redirect::to('sign-in.html');
     }
 
     public function doLogout(Request $request)
