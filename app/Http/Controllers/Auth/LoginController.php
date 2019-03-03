@@ -148,7 +148,7 @@ class LoginController extends Controller
 
         $auth_token = new AuthToken();
         $auth_token->user_id = $existingUser->id;
-        $auth_token->token = md5(time());
+        $auth_token->token = $request->session()->token();
         $auth_token->save();
 
         unset($existingUser->id);
