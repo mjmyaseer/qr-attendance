@@ -10,7 +10,6 @@
         @endphp
         <!-- Main menu -->
             <li class="<?php  if($url == '/secure/dashboard.html'){echo $selected;} ?>">  <a href="<?php echo e(url("/secure/dashboard.html")); ?>"><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
-            <li class="<?php  if($url == '/secure/categories' || $url == '/secure/add-categories' ){echo $selected;} ?>"> <a href="<?php echo e(url("/secure/categories")); ?>"><i class="glyphicon glyphicon-calendar"></i> Categories</a></li>
             <li class="<?php  if($url == '/secure/customers' || $url == '/secure/add-customers'){echo $selected;} ?>"> <a href="<?php echo e(url("/secure/customers")); ?>"><i class="glyphicon glyphicon-king"></i> Customers</a></li>
             <li class="<?php  if($url == '/secure/events' || $url == '/secure/add-event'){echo $selected;} ?>"> <a href="<?php echo e(url("/secure/event")); ?>"><i class="glyphicon glyphicon-king"></i> Event</a></li>
             <li class="<?php  if($url == '/secure/userEvents' || $url == '/secure/add-userEvent'){echo $selected;} ?>"> <a href="<?php echo e(url("/secure/userEvent")); ?>"><i class="glyphicon glyphicon-king"></i> User Event</a></li>
