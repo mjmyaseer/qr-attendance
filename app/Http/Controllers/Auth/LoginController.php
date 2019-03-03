@@ -99,10 +99,7 @@ class LoginController extends Controller
 
         $existingUser->token = $auth_token->token;
 
-        return response()->json([
-            'status' => 'SUCCESS',
-            'user' => $existingUser
-        ]);
+        return Redirect::to('secure/dashboard.html');
     }
 
     public function doLogout(Request $request)
@@ -151,7 +148,7 @@ class LoginController extends Controller
 
         $auth_token = new AuthToken();
         $auth_token->user_id = $existingUser->id;
-        $auth_token->token = $request->session()->token();
+        $auth_token->token = md5(time());
         $auth_token->save();
 
         unset($existingUser->id);
