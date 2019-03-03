@@ -137,7 +137,6 @@ class CustomersController extends Controller
                 ->make(Config::get('custom_messages.INVALID_NIC'), 403);
         }
 
-
         return \response()->json($results);
     }
 
@@ -157,8 +156,8 @@ class CustomersController extends Controller
             $request->merge(['nic' => $customer[0]->customer_nic]);
 
             $result = $this->loginController->doSession($request);
-//            $return = []
-            return \response()->json($result->original);
+//dd($result);
+            return \response()->json($result);
         } else {
             return response()
                 ->make(Config::get('custom_messages.INVALID_OTP'), 403);

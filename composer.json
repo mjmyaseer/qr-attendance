@@ -10,8 +10,9 @@
   "require": {
     "php": ">=5.6.4",
     "barryvdh/laravel-dompdf": "^0.8.4",
+    "guzzlehttp/guzzle": "^6.0",
     "laracasts/flash": "^3.0",
-    "laravel/framework": "5.6.*",
+    "laravel/framework": "5.5.*",
     "laravel/tinker": "~1.0",
     "shoutoutlabs/shoutout-sdk": "^3.0",
     "simplesoftwareio/simple-qrcode": "~2",
@@ -43,10 +44,13 @@
       "php artisan key:generate"
     ],
     "post-install-cmd": [
-      "Illuminate\\Foundation\\ComposerScripts::postInstall"
+      "Illuminate\\Foundation\\ComposerScripts::postInstall",
+      "php artisan optimize"
+
     ],
     "post-update-cmd": [
-      "Illuminate\\Foundation\\ComposerScripts::postUpdate"
+      "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+      "php artisan optimize"
     ]
   },
   "config": {

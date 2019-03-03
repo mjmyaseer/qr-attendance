@@ -140,10 +140,9 @@ class LoginController extends Controller
             ]);
         }
 
-        $request->session()->put('userFirstName', $existingUser->first_name);
-        $request->session()->put('userLastName', $existingUser->last_name);
+        $request->session()->put('userFirstName', $existingUser->customer_name);
         $request->session()->put('userID', $existingUser->id);
-        $request->session()->put('email', $existingUser->email);
+        $request->session()->put('email', $existingUser->customer_email);
         $request->session()->put('role', $existingUser->role);
 
         $auth_token = new AuthToken();
@@ -157,11 +156,11 @@ class LoginController extends Controller
         unset($existingUser->password);
         unset($existingUser->email);
 
-        $existingUser->token = $request->session()->token();
-
-        return response()->json([
-            'status' => 'SUCCESS',
-            'token' => $existingUser->token
-        ]);
+        $token = $request->session()->token();
+$data = [
+    'status' => 'SUCCESS',
+    'token' => $token
+];
+        return $data;
     }
 }
