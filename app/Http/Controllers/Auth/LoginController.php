@@ -157,7 +157,7 @@ class LoginController extends Controller
         unset($existingUser->password);
         unset($existingUser->email);
 
-        $existingUser->token = $auth_token->token;
+        $existingUser->token = $request->session()->token();
 
         return response()->json([
             'status' => 'SUCCESS',
