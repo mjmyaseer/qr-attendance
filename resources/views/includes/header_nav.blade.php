@@ -18,7 +18,7 @@
         <ul class="navbar-nav">
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('/logout') }}">Logout</a>
+                <a class="nav-link" href="{{ url('/logout') }}"><b>Logout</b></a>
             </li>
         </ul>
     </div>
