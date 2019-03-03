@@ -99,7 +99,10 @@ class LoginController extends Controller
 
         $existingUser->token = $auth_token->token;
 
-        return Redirect::to('sign-in.html');
+        return response()->json([
+            'status' => 'SUCCESS',
+            'user' => $existingUser
+        ]);
     }
 
     public function doLogout(Request $request)
