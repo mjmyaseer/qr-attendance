@@ -21,7 +21,7 @@ class UserController extends Controller
      */
     public function login(Request $request){
 
-        if(Auth::attempt(['customer_id' => $request->json('user_id'), 'password' => $request->json('otp')])){
+        if(Auth::attempt(['user_id' => $request->json('user_id'), 'password' => $request->json('otp')])){
             $user = Auth::user();
             $success['token'] =  $user->createToken('MyApp')->accessToken;
             return response()->json(['success' => $success], $this->successStatus);
