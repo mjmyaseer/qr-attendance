@@ -28,7 +28,7 @@ class OTPRepo implements OTPInterface
             $otp->where('customer_id', '=', $data->customer_id)->delete();
             $otp->customer_id = $data->customer_id;
             $otp->otp = $data->otp;
-            $otp->otp_hashed = Hash::make($data->otp);
+            $otp->password = Hash::make($data->otp);
             $otp->save();
             return $otp;
     }
