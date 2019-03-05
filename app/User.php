@@ -12,6 +12,9 @@ class User extends Authenticatable
 {
     use HasApiTokens, Notifiable;
 
+    protected $table = "otp";
+    const TABLE = 'otp';
+
     /**
      * The attributes that are mass assignable.
      *
