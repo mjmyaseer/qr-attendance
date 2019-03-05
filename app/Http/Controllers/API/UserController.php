@@ -24,11 +24,9 @@ class UserController extends Controller
         if(Auth::attempt(['customer_id' => $request->json('user_id'), 'password' => $request->json('otp')])){
             $user = Auth::user();
             $success['token'] =  $user->createToken('attend')->accessToken;
-            dd(111);
             return response()->json(['success' => $success], $this->successStatus);
         }
         else{
-            dd(2222);
             return response()->json(['error'=>'Unauthorised'], 401);
         }
     }
