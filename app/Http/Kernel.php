@@ -42,6 +42,7 @@ class Kernel extends HttpKernel
         ],
 
         'checkEntry' => [
+            \Illuminate\Session\Middleware\StartSession::class,
             \App\Http\Middleware\CheckAuthentication::class,
         ],
     ];

@@ -10,8 +10,7 @@ namespace repo\Mysql;
 
 
 use App\Http\Models\OTP;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Repo\Contracts\OTPInterface;
 
 class OTPRepo implements OTPInterface
@@ -29,6 +28,7 @@ class OTPRepo implements OTPInterface
             $otp->where('customer_id', '=', $data->customer_id)->delete();
             $otp->customer_id = $data->customer_id;
             $otp->otp = $data->otp;
+            $otp->otp_hashed = Hash::make($data->otp);
             $otp->save();
             return $otp;
     }

@@ -147,7 +147,7 @@ class LoginController extends Controller
 
         $auth_token = new AuthToken();
         $auth_token->user_id = $existingUser->id;
-        $auth_token->token = $request->session()->token();
+        $auth_token->token = md5(time());
         $auth_token->save();
 
         unset($existingUser->id);
@@ -156,11 +156,10 @@ class LoginController extends Controller
         unset($existingUser->password);
         unset($existingUser->email);
 
-        $token = $request->session()->token();
-$data = [
-    'status' => 'SUCCESS',
-    'token' => $token
-];
+        $token = $auth_token->token;
+        $data = [
+            'status' => 'SUCCESS'
+        ];
         return $data;
     }
 }

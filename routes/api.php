@@ -13,28 +13,20 @@ use Illuminate\Http\Request;
 |
 */
 
-/**
- * Authentication
- */
-Route::post('/sign-up','Auth\RegisterController@newUser');
-Route::post('/sign-in','Auth\LoginController@doLogin');
 
-Route::group(['prefix' => 'v1','middleware'=>'apiauth'],function(){
+Route::post('login', 'API\UserController@login');
+Route::post('register', 'API\UserController@register');
+
+Route::group(['middleware' => 'auth:api'], function(){
+    Route::post('details', 'API\UserController@details');
+
+//receive user_id and send all events the user is registered
+    Route::post('/check/getUserEvents', "Event\EventController@getUserEvents");
+
+    //
+    Route::post('/check/qrCode', "Event\EventController@sendQR");
 
 
-    //Route::get('/acknowledge','Home\HomeController@acknowledge');
-    //Route::get('/acknowledge2','Home\HomeController@acknowledge2');
-
-    Route::post('/saveItem','Item\ItemsController@saveItem');
-    Route::post('/saveSupplier','Supplier\SuppliersController@saveSupplier');
-    Route::post('/saveCustomer','Customer\CustomersController@saveCustomer');
+    Route::post('/check/attend', "Attendance\AttendanceController@attend");
 });
 
-/*
-Route::group(['prefix' => 'v1'],function(){
-    Route::post('/saveItem','Item\ItemsController@saveItem');
-    Route::post('/saveCategory','Category\CategoriesController@saveCategory');
-    //Route::post('/saveCategory','Category\CategoriesController@saveCategory');
-});
-
-*/

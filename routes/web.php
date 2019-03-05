@@ -98,20 +98,20 @@ Route::group(['prefix' => 'secureApi'], function () {
     Route::post('/check/nic', "Customer\CustomersController@getCustomer");
 
     //check otp and send 200 success
-    Route::post('/check/otp', "Customer\CustomersController@verifyOtp");
+    Route::post('/check/otp', 'API\UserController@login');
 
 });
 
-Route::group(['prefix' => 'secured'], function () {
-    //receive user_id and send all events the user is registered
-    Route::post('/check/getUserEvents', "Event\EventController@getUserEvents");
-
-    //
-    Route::post('/check/qrCode', "Event\EventController@sendQR");
-
-
-    Route::post('/check/attend', "Attendance\AttendanceController@attend");
-});
+//Route::group(['prefix' => 'secured','middleware' => ['checkEntry']], function () {
+//    //receive user_id and send all events the user is registered
+//    Route::post('/check/getUserEvents', "Event\EventController@getUserEvents");
+//
+//    //
+//    Route::post('/check/qrCode', "Event\EventController@sendQR");
+//
+//
+//    Route::post('/check/attend', "Attendance\AttendanceController@attend");
+//});
 
 
 //User related Routes
