@@ -183,6 +183,9 @@ class EventController extends Controller
 
     public function getUserEvents(Request $request)
     {
+
+        dd($request);
+
         $validationRules = [];
 
         if (isset($request['user_id'])) {

@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 Route::post('login', 'API\UserController@login');
 Route::post('register', 'API\UserController@register');
 
-Route::group(['middleware' => 'auth:api'], function(){
+//Route::group(['middleware' => 'auth:api'], function(){
     Route::post('details', 'API\UserController@details');
 
 //receive user_id and send all events the user is registered
@@ -28,5 +28,5 @@ Route::group(['middleware' => 'auth:api'], function(){
 
 
     Route::post('/check/attend', "Attendance\AttendanceController@attend");
-});
+//});
 
