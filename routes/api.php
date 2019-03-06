@@ -30,24 +30,12 @@ Route::group(['prefix' => 'v1','middleware'=>'apiauth'],function(){
     Route::post('/saveCustomer','Customer\CustomersController@saveCustomer');
 });
 
-Route::group(['prefix' => 'secured'], function () {
+Route::group(['prefix' => 'secured','middleware'=>'auth:api'], function () {
     //receive user_id and send all events the user is registered
     Route::post('/check/getUserEvents', "Event\EventController@getUserEvents");
 
-    //
     Route::post('/check/qrCode', "Event\EventController@sendQR");
 
 
     Route::post('/check/attend', "Attendance\AttendanceController@attend");
 });
-
-
-
-/*
-Route::group(['prefix' => 'v1'],function(){
-    Route::post('/saveItem','Item\ItemsController@saveItem');
-    Route::post('/saveCategory','Category\CategoriesController@saveCategory');
-    //Route::post('/saveCategory','Category\CategoriesController@saveCategory');
-});
-
-*/
