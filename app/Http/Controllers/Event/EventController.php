@@ -103,7 +103,8 @@ class EventController extends Controller
 
     public function adduserEvent($id = null)
     {
-        if (!$id == null) {
+
+        if ($id == null) {
             $event = $this->event->userEventIndex($id);
 
             return view('userEvent.add_userEvent')->with('userEvent', $event);

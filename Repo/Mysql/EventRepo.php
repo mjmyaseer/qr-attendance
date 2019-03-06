@@ -117,7 +117,7 @@ class EventRepo implements EventInterface
             ->select(
                 Event::TABLE . '.id as event_id',
                 Event::TABLE . '.event_name',
-                Event::TABLE . '.event_code'
+                Event::TABLE . '.qr_code'
             )
             ->where(Event::TABLE . '.id', '=', $id);
 
@@ -168,7 +168,6 @@ class EventRepo implements EventInterface
 
     public function userEventIndex($id = null)
     {
-
         $query = DB::table(UserEvent::TABLE)
             ->select(
                 UserEvent::TABLE . '.id as user_event_id',
@@ -186,6 +185,11 @@ class EventRepo implements EventInterface
         if ($id != '' && !isset($id['event_id'])) {
             $query->where(UserEvent::TABLE . '.id', '=', $id);
         }
+
+        if ($id != '' && isset($id['userEvent_id'])) {
+            $query->where(UserEvent::TABLE . '.id', '=', $id['userEvent_id']);
+        }
+
 
         if (isset($id['name']) && $id['name'] != '') {
             $query->where(Event::TABLE . '.event_name', 'like', '%' . $id['name'] . '%');

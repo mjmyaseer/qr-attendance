@@ -9,11 +9,6 @@ class RepositoryServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(
-            \Repo\Contracts\CategoryInterface::class,
-            \Repo\Mysql\CategoryRepo::class
-        );
-
-        $this->app->bind(
             \Repo\Contracts\CustomerInterface::class,
             \Repo\Mysql\CustomerRepo::class
         );

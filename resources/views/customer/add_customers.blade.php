@@ -98,8 +98,8 @@
                             <div class="form-group">
                                 <label>Telephone</label>
                                 <input class="form-control"
-                                       placeholder="Telephone"
-                                       type="text"
+                                       placeholder="7*******"
+                                       type="number"
                                        id="customer_telephone"
                                        name="customer_telephone"
                                        value="@php

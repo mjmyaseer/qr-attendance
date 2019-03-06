@@ -25,15 +25,7 @@ Route::get('/sign-in.html', 'User\UsersController@index');
 Route::post('/sign-in.html', "Auth\LoginController@doLogin");
 Route::post('api/sign-in', "Auth\LoginController@doLogin");
 Route::get('logout', "Auth\LoginController@doLogout");
-//Route::post('check/otp', "Customer\CustomersController@verifyOtp");
-//Route::post('otp', function (){
-//    dd(11);
-//});
 
-
-Route::get('/aa', function () {
-
-})->middleware('authEntry');
 
 //User related Routes
 Route::group(['prefix' => 'secure'], function () {
@@ -43,21 +35,6 @@ Route::group(['prefix' => 'secure'], function () {
 
         Route::get('/dashboard.html', 'Home\HomeController@index');
 
-        Route::get('/items', 'Item\ItemsController@index');
-        Route::get('/add-items', 'Item\ItemsController@addItem');
-        Route::get('/add-items/{id}', 'Item\ItemsController@addItem');
-        Route::post('/add-items/{id}', 'Item\ItemsController@saveItem');
-        Route::post('/add-items', 'Item\ItemsController@saveItem');
-        Route::post('/saveItem', 'Item\ItemsController@saveItem');
-
-        Route::get('/view-item/{id}', 'Item\ItemsController@viewItem');
-
-        Route::get('/categories', 'Category\CategoriesController@index');
-        Route::get('/add-categories', 'Category\CategoriesController@addCategory');
-        Route::get('/add-categories/{id}', 'Category\CategoriesController@addCategory');
-        Route::post('/add-categories/{id}', 'Category\CategoriesController@saveCategory');
-        Route::post('/add-categories', 'Category\CategoriesController@saveCategory');
-//    Route::post('/saveCategory','Category\CategoriesController@saveCategory');
 
         Route::get('/add-users', 'Auth\RegisterController@addUser');
 
@@ -110,7 +87,7 @@ Route::group(['prefix' => 'secure'], function () {
         Route::get('/sear-branch', "Branch\BranchController@searchByBranchName");
         Route::get('/sear-city', "City\CityController@searchByCityName");
         Route::get('/sear-attend', "Attendance\AttendanceController@searchByAttendance");
-        Route::get('/qr-code', "QR\QRController@scanQRCode");
+        Route::get('/qr-code/{type}/{id}', "QR\QRController@printEvent");
 
 
     });

@@ -8,11 +8,11 @@
         <div class="col-md-12">
             <div class="content-box-large">
                 <div class="panel-heading">
-                    <div class="panel-title">Events</div>
+                    <div class="panel-title">User Events</div>
 
                     <div class="panel-options">
                         <a href="{{url('/secure/add-userEvent')}}"
-                           data-rel="collapse">Add New Event</a>
+                           data-rel="collapse">Map New User Event</a>
                         <a href="#" data-rel="reload"><i class="glyphicon glyphicon-refresh"></i></a>
                     </div>
                 </div>
@@ -43,6 +43,7 @@
                             <th>Customer Name</th>
                             <th>Created By</th>
                             <th style="text-align: center">Edit</th>
+                            <th style="text-align: center">Print QR</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -55,7 +56,8 @@
                                 <td>{{$event->event_name}}</td>
                                 <td>{{$event->customer_name}}</td>
                                 <td>{{$event->event_created_by}}</td>
-                                <td style="text-align: center"><a href="{{url("/secure/add-city/{$event->event_id}")}}">Edit</a>
+                                <td style="text-align: center"><a href="{{url("/secure/add-userEvent/{$event->event_id}")}}">Edit</a>
+                                <td style="text-align: center"><a href="{{url("/secure/qr-code/userEvent/{$event->user_event_id}")}}">Print</a>
                                 </td>
                             </tr>
                             @php

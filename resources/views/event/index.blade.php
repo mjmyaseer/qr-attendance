@@ -42,6 +42,7 @@
                             <th>Name</th>
                             <th>Created By</th>
                             <th style="text-align: center">Edit</th>
+                            <th style="text-align: center">Print QR</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -54,6 +55,7 @@
                                 <td>{{$event->event_name}}</td>
                                 <td>{{$event->event_created_by}}</td>
                                 <td style="text-align: center"><a href="{{url("/secure/add-city/{$event->event_id}")}}">Edit</a>
+                                <td style="text-align: center"><a href="{{url("/secure/qr-code/event/{$event->event_id}")}}">Print</a>
                                 </td>
                             </tr>
                             @php
@@ -76,5 +78,5 @@
 
 
 @section('js')
-    <script src="../js/app/cityIndex.js"></script>
+    <script src="../js/app/event.js"></script>
 @endsection
