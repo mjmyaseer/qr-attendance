@@ -125,16 +125,16 @@ Route::group(['prefix' => 'secureApi'], function () {
 
 });
 
-Route::group(['prefix' => 'secured'], function () {
-    //receive user_id and send all events the user is registered
-    Route::post('/check/getUserEvents', "Event\EventController@getUserEvents");
-
-    //
-    Route::post('/check/qrCode', "Event\EventController@sendQR");
-
-
-    Route::post('/check/attend', "Attendance\AttendanceController@attend");
-});
+//Route::group(['prefix' => 'secured'], function () {
+//    //receive user_id and send all events the user is registered
+//    Route::post('/check/getUserEvents', "Event\EventController@getUserEvents");
+//
+//    //
+//    Route::post('/check/qrCode', "Event\EventController@sendQR");
+//
+//
+//    Route::post('/check/attend', "Attendance\AttendanceController@attend");
+//});
 
 
 //User related Routes
