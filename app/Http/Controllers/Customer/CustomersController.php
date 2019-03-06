@@ -157,7 +157,7 @@ class CustomersController extends Controller
             $request->merge(['nic' => $customer[0]->customer_nic]);
 
             $result = $this->loginController->doSession($request);
-//            $return = []
+
             return \response()->json($result->original);
         } else {
             return response()

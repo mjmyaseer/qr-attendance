@@ -114,9 +114,6 @@ class LoginController extends Controller
 
     public function doSession(Request $request)
     {
-
-//        dd($request->header('X-CSRF-TOKEN'));
-
         if (!$request->has('email')) {
             return response()->json([
                 'status' => 'FAILED',
@@ -149,6 +146,7 @@ class LoginController extends Controller
         $request->session()->put('email', $existingUser->email);
         $request->session()->put('role', $existingUser->role);
 
+        $request->session()->regenerateToken();
         $auth_token = new AuthToken();
         $auth_token->user_id = $existingUser->id;
         $auth_token->token = $request->session()->token();
