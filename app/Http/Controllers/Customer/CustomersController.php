@@ -158,7 +158,7 @@ class CustomersController extends Controller
 
             $result = $this->loginController->doSession($request);
 //            $return = []
-            return \response()->json($result->original);
+            return \response()->json($result);
         } else {
             return response()
                 ->make(Config::get('custom_messages.INVALID_OTP'), 403);

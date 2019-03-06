@@ -155,10 +155,10 @@ class LoginController extends Controller
         unset($existingUser->email);
 
         $token = $request->session()->token();
-$data = [
-    'status' => 'SUCCESS',
-    'token' => $token
-];
+        $data = [
+            'status' => 'SUCCESS',
+            'token' => $token
+        ];
         return $data;
     }
 }
