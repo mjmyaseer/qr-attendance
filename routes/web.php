@@ -30,8 +30,6 @@ Route::get('logout', "Auth\LoginController@doLogout");
 //User related Routes
 Route::group(['prefix' => 'secure'], function () {
     Route::group(['middleware' => ['checkEntry']], function () {
-        //
-
 
         Route::get('/dashboard.html', 'Home\HomeController@index');
 
