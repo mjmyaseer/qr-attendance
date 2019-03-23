@@ -3,8 +3,8 @@
         @php
         $path = $_SERVER['REQUEST_URI'];
         $path = (explode("/",$path));
-        $secure = $path[2];
-        $final = $path[3];
+        $secure = $path[1];
+        $final = $path[2];
         $url = '/'.$secure.'/'.$final;
         $selected = 'current';
         @endphp
