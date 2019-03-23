@@ -37,7 +37,7 @@
                                        type="text"
                                        id="customer_code"
                                        name="customer_code"
-                                       value="@php
+                                       value="{{ old('customer_code') }}@php
                                            if (isset($customers[0]->customer_code))
                                    {
                                    echo $customers[0]->customer_code;
@@ -53,7 +53,7 @@
                                        type="text"
                                        id="customer_name"
                                        name="customer_name"
-                                       value="@php
+                                       value="{{ old('customer_name') }}@php
                                            if (isset($customers[0]->customer_name))
                                    {
                                    echo $customers[0]->customer_name;
@@ -70,7 +70,7 @@
                                        id="customer_email"
                                        type="email"
                                        name="customer_email"
-                                       value="@php
+                                       value="{{ old('customer_email') }}@php
                                            if (isset($customers[0]->customer_email))
                                    {
                                    echo $customers[0]->customer_email;
@@ -86,7 +86,7 @@
                                        id="customer_nic"
                                        type="text"
                                        name="customer_nic"
-                                       value="@php
+                                       value="{{ old('customer_nic') }}@php
                                            if (isset($customers[0]->customer_nic))
                                    {
                                    echo $customers[0]->customer_nic;
@@ -102,7 +102,7 @@
                                        type="number"
                                        id="customer_telephone"
                                        name="customer_telephone"
-                                       value="@php
+                                       value="{{ old('customer_telephone') }}@php
                                            if (isset($customers[0]->customer_telephone))
                                    {
                                    echo $customers[0]->customer_telephone;
@@ -118,7 +118,7 @@
                                        type="text"
                                        id="customer_address"
                                        name="customer_address"
-                                       value="@php
+                                       value="{{ old('customer_address') }}@php
                                            if (isset($customers[0]->customer_address))
                                    {
                                    echo $customers[0]->customer_address;

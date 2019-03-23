@@ -39,7 +39,7 @@
                                        type="text"
                                        id="event_name"
                                        name="event_name"
-                                       value="@php
+                                       value="{{ old('event_name') }}@php
                                            if (isset($city[0]->event_name))
                                    {
                                    echo $city[0]->event_name;
@@ -56,7 +56,7 @@
                                        type="date"
                                        id="event_date"
                                        name="event_date"
-                                       value="@php
+                                       value="{{ old('event_date') }}@php
                                            if (isset($city[0]->event_date))
                                    {
                                    echo $city[0]->event_date;

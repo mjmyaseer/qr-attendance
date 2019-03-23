@@ -99,6 +99,11 @@ class LoginController extends Controller
 
         $existingUser->token = $auth_token->token;
 
+//        return response()->json([
+//            'status' => 'SUCCESS',
+//            'user' => $existingUser
+//        ]);
+
         return Redirect::to('/secure/dashboard.html');
     }
 

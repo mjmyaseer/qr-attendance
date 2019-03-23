@@ -68,6 +68,7 @@ class CustomersController extends Controller
 
     public function saveCustomer($id = null, Request $request)
     {
+//        dd($request->all());
         $validationRules = [
             'customer_code' => 'required',
             'customer_name' => 'required',
@@ -136,7 +137,6 @@ class CustomersController extends Controller
             return response()
                 ->make(Config::get('custom_messages.INVALID_NIC'), 403);
         }
-
 
         return \response()->json($results);
     }

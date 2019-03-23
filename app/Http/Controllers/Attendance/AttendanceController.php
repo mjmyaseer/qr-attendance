@@ -45,7 +45,7 @@ class AttendanceController extends Controller
     public function searchByAttendance(Request $request)
     {
         $data = $request->all();
-
+dd(22222);
         $keyword['customer_details'] = $request->get('keyword');
 
         $attendance = $this->attendance->index($keyword);

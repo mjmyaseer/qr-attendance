@@ -104,7 +104,7 @@ class EventController extends Controller
     public function adduserEvent($id = null)
     {
 
-        if ($id == null) {
+        if ($id != null) {
             $event = $this->event->userEventIndex($id);
 
             return view('userEvent.add_userEvent')->with('userEvent', $event);
@@ -138,7 +138,7 @@ class EventController extends Controller
 
         if ($eventStatus['status']['code'] == 200) {
             flash()->success($eventStatus['status']['message']);
-            return Redirect::to('secure/event')->with('event', $event);
+            return Redirect::to('secure/userEvent')->with('event', $event);
 
         } elseif ($eventStatus['status']['code'] == 422) {
             flash()->error($eventStatus['status']['message']);

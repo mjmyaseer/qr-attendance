@@ -30,6 +30,7 @@ Route::group(['prefix' => 'v1','middleware'=>'apiauth'],function(){
     Route::post('/saveCustomer','Customer\CustomersController@saveCustomer');
 });
 
+
 Route::group(['prefix' => 'secured'], function () {
     //receive user_id and send all events the user is registered
     Route::post('/check/getUserEvents', "Event\EventController@getUserEvents");

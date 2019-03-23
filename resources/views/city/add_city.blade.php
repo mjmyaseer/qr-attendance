@@ -39,7 +39,7 @@
                                        type="text"
                                        id="city_name"
                                        name="city_name"
-                                       value="@php
+                                       value="{{ old('city_name') }}@php
                                            if (isset($city[0]->city_name))
                                    {
                                    echo $city[0]->city_name;
