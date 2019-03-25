@@ -49,6 +49,9 @@ class EventController extends Controller
         $this->attendance = $attendance;
     }
 
+    /**
+     * @return $this
+     */
     public function index()
     {
         $event = $this->event->getAllEvents();
@@ -67,6 +70,11 @@ class EventController extends Controller
 
     }
 
+    /**
+     * @param null $id
+     * @param Request $request
+     * @return $this
+     */
     public function saveEvent($id = null, Request $request)
     {
         $validationRules = [
@@ -95,6 +103,9 @@ class EventController extends Controller
         }
     }
 
+    /**
+     * @return $this
+     */
     public function userEventIndex()
     {
         $event = $this->event->userEventIndex();
@@ -121,6 +132,11 @@ class EventController extends Controller
 
     }
 
+    /**
+     * @param null $id
+     * @param Request $request
+     * @return $this
+     */
     public function saveUserEvent($id = null, Request $request)
     {
         $validationRules = [
@@ -145,6 +161,10 @@ class EventController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function searchEventByName(Request $request)
     {
         $data = $request->all();
@@ -156,6 +176,10 @@ class EventController extends Controller
         return \response()->json($customer);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
     public function sendQR(Request $request)
     {
         $validationRules = [
@@ -197,11 +221,13 @@ class EventController extends Controller
 
         $this->validate($request, $validationRules);
 
-        $keyword = [];
-        $keyword['user_id'] = $request->get('user_id');
-        $keyword['event_id'] = $request->get('event_id');
+        // Commented Because initially we are showing all the events to all the users
+//        $keyword = [];
+//        $keyword['user_id'] = $request->get('user_id');
+//        $keyword['event_id'] = $request->get('event_id');
+//        $event = $this->event->index($keyword);
 
-        $event = $this->event->index($keyword);
+        $event = $this->event->getAllEvents();
 
         return $event;
     }
