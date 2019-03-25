@@ -47,7 +47,7 @@ Route::group(['prefix' => 'secure'], function () {
         Route::get('/add-event', 'Event\EventController@addEvent');
         Route::get('/add-event/{id}', 'Event\EventController@addEvent');
         Route::post('/add-event/{id}', 'Event\EventController@saveEvent');
-        Route::post('/add-event', 'Event\EventController@saveEvent');
+    Route::post('/add-event', 'Event\EventController@saveEvent');
 
         Route::get('/userEvent', 'Event\EventController@userEventIndex');
         Route::get('/add-userEvent', 'Event\EventController@addUserEvent');

@@ -68,6 +68,23 @@ class EventRepo implements EventInterface
         return $results;
     }
 
+    public function getAllEvents()
+    {
+        $event = DB::table(Event::TABLE)
+            ->select(
+                Event::TABLE . '.id as event_id',
+                Event::TABLE . '.event_name',
+                Event::TABLE . '.qr_code as event_code',
+                Event::TABLE . '.date as event_date',
+                Event::TABLE . '.created_by as event_created_by',
+                Event::TABLE . '.created_at as event_created_at',
+                Event::TABLE . '.updated_at as event_updated_at');
+
+        $results = $event->get();
+        return $results;
+    }
+
+
     public function saveEvent($id = null, $request)
     {
         try {
