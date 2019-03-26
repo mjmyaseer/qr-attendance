@@ -22,4 +22,7 @@ interface EventInterface
     public function userEventIndex($id = null);
 
     public function getQRDetails($request);
+
+    public function getEvent($request);
+
 }

@@ -134,6 +134,7 @@ class EventRepo implements EventInterface
             ->select(
                 Event::TABLE . '.id as event_id',
                 Event::TABLE . '.event_name',
+                Event::TABLE . '.unique_id',
                 Event::TABLE . '.qr_code'
             )
             ->where(Event::TABLE . '.id', '=', $id);

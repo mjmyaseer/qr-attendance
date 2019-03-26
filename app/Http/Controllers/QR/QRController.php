@@ -38,8 +38,10 @@ class QRController extends Controller
             case 'event':
                 $result = $this->event->getEvent($id);
                 if (isset($result[0]) && !empty($result[0])) {
+
+                    $string = 'event_id = '.$result[0]->event_id.',unique_id = '.$result[0]->unique_id;
                     $events = [
-                        'qr' => $result[0]->qr_code,
+                        'qr' => $string,
                         'name' => $result[0]->event_name
                     ];
                     return view('print.index')->with('event', $events);
